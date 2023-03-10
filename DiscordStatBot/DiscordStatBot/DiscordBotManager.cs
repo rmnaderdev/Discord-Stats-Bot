@@ -38,11 +38,11 @@ namespace DiscordStatBot
             _client.PresenceUpdated += PresenceUpdated;
         }
 
-        private Task PresenceUpdated(SocketUser user, SocketPresence beforePresence, SocketPresence afterPresence)
+        private Task PresenceUpdated(SocketUser user, SocketPresence? beforePresence, SocketPresence? afterPresence)
         {
-            if (beforePresence.Status != afterPresence.Status)
+            if (beforePresence?.Status != afterPresence?.Status)
             {
-                _logger.LogInformation($"{user.Username}#{user.Discriminator} presence status has updated from {beforePresence.Status} to {afterPresence.Status}");
+                _logger.LogInformation($"{user.ToString()} presence status has updated from {beforePresence?.Status.ToString() ?? "N/A"} to {afterPresence?.Status.ToString() ?? "N/A"}");
             }
 
             return Task.CompletedTask;
